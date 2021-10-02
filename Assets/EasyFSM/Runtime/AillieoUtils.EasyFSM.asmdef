@@ -1,6 +1,8 @@
 {
     "name": "AillieoUtils.EasyFSM",
-    "references": [],
+    "references": [
+        "AillieoUtils.PropLogics"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

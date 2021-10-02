@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using AillieoUtils.PropLogics;
 using UnityEngine;
 
-namespace AillieoUtils.FSM
+namespace AillieoUtils.GOAP
 {
-    public class Condition : ICondition
+    public class Condition
     {
         public readonly string key;
-        public readonly PropertyCondition propertyCondition;
+        public readonly ConditionMode op;
+        public readonly Property value;
 
         public Condition(string key, ConditionMode op, Property value)
         {
             this.key = key;
-            this.propertyCondition = new PropertyCondition()
-            {
-                op = op,
-                referenceValue = value,
-            };
+            this.op = op;
+            this.value = value;
         }
 
         public bool Evaluate()
@@ -25,7 +23,7 @@ namespace AillieoUtils.FSM
             // todo
             // Property curValue = Get(key);
             Property curValue = default;
-            return propertyCondition.EvaluateWith(curValue);
+            return false;
         }
     }
 }

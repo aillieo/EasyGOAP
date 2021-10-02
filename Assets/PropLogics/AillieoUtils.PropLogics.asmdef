@@ -1,9 +1,6 @@
 {
-    "name": "AillieoUtils.EasyGOAP",
-    "references": [
-        "AillieoUtils.EasyFSM",
-        "AillieoUtils.PropLogics"
-    ],
+    "name": "AillieoUtils.PropLogics",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
