@@ -6,9 +6,10 @@ namespace Sample
 {
     public static class ItemTypes
     {
-        public const string Bread = nameof(Bread);
+        public const string Burger = nameof(Burger);
         public const string Beef = nameof(Beef);
         public const string Tomato = nameof(Tomato);
-        public const string Vegetable = nameof(Vegetable);
+        public const string Cheese = nameof(Cheese);
+        public const string Bun = nameof(Bun);
     }
 }

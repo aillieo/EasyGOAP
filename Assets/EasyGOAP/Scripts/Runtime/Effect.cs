@@ -5,8 +5,22 @@ using UnityEngine;
 
 namespace AillieoUtils.GOAP
 {
-    public interface IEffect
+    public class Effect
     {
-        void ApplyModifications();
+        public readonly string key;
+        public readonly ModifyMode op;
+        public readonly Property value;
+
+        public Effect(string key, ModifyMode op, Property value)
+        {
+            this.key = key;
+            this.op = op;
+            this.value = value;
+        }
+
+        public void ApplyModifications()
+        {
+
+        }
     }
 }

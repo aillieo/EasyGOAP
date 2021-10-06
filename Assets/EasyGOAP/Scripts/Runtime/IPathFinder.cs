@@ -9,7 +9,7 @@ namespace AillieoUtils.GOAP
         IEnumerable<T> CollectNeighbors(T node);
     }
 
-    public interface IPathFinder<T>
+    public interface IPathfinder<T>
     {
         IEnumerable<T> FindPath(T fromNode, T toNode);
     }

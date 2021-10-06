@@ -2,7 +2,8 @@
     "name": "EasyGOAPSample",
     "references": [
         "AillieoUtils.EasyFSM",
-        "AillieoUtils.EasyGOAP"
+        "AillieoUtils.EasyGOAP",
+        "AillieoUtils.PropLogics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

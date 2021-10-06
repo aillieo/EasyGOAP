@@ -22,50 +22,54 @@ namespace AillieoUtils.PropLogics
             [FieldOffset(0)]
             public float floatValue;
 
-            public static implicit operator float(Value value)
-            {
-                return value.floatValue;
-            }
-
-            public static implicit operator Value(float value)
-            {
-                return new Value()
-                {
-                    floatValue = value,
-                };
-            }
-
             [FieldOffset(0)]
             public int intValue;
 
-            public static implicit operator int(Value value)
-            {
-                return value.intValue;
-            }
-
-            public static implicit operator Value(int value)
-            {
-                return new Value()
-                {
-                    intValue = value,
-                };
-            }
-
             [FieldOffset(0)]
             public bool boolValue;
-
-            public static implicit operator bool(Value value)
-            {
-                return value.boolValue;
-            }
-
-            public static implicit operator Value(bool value)
-            {
-                return new Value()
-                {
-                    boolValue = value,
-                };
-            }
         }
+
+        public static implicit operator float(Property prop)
+        {
+            return prop.value.floatValue;
+        }
+
+        public static implicit operator Property(float value)
+        {
+            return new Property()
+            {
+                type = ValueType.Float,
+                value = new Value(){floatValue = value},
+            };
+        }
+
+        public static implicit operator int(Property prop)
+        {
+            return prop.value.intValue;
+        }
+
+        public static implicit operator Property(int value)
+        {
+            return new Property()
+            {
+                type = ValueType.Int,
+                value = new Value(){intValue = value},
+            };
+        }
+
+        public static implicit operator bool(Property prop)
+        {
+            return prop.value.boolValue;
+        }
+
+        public static implicit operator Property(bool value)
+        {
+            return new Property()
+            {
+                type = ValueType.Bool,
+                value = new Value(){boolValue = value},
+            };
+        }
+
     }
 }

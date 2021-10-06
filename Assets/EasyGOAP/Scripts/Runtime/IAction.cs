@@ -8,6 +8,6 @@ namespace AillieoUtils.GOAP
     {
         IEnumerable<Condition> requirement { get; }
 
-        IEffect effects { get; }
+        IEnumerable<Effect> effects { get; }
     }
 }
