@@ -6,8 +6,10 @@ namespace AillieoUtils.GOAP
 {
     public interface IAction
     {
-        IEnumerable<Condition> requirement { get; }
+        IEnumerable<Condition> GetRequirements();
 
-        IEnumerable<Effect> effects { get; }
+        IEnumerable<Effect> GetEffects();
+
+        float GetCost();
     }
 }
