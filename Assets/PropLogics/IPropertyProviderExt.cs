@@ -7,9 +7,10 @@ namespace AillieoUtils.PropLogics
     {
         public static Property GetOrDefault(this IPropertyProvider propertyProvider, string key, Property defaultValue)
         {
-            if (propertyProvider.HasKey(key))
+            Property prop = propertyProvider.Get(key);
+            if (prop.Valid())
             {
-                return propertyProvider.Get(key);
+                return prop;
             }
 
             return defaultValue;

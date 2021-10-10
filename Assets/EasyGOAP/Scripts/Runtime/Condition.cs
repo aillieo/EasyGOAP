@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using AillieoUtils.PropLogics;
@@ -8,22 +9,27 @@ namespace AillieoUtils.GOAP
     public class Condition
     {
         public readonly string key;
-        public readonly ConditionMode op;
-        public readonly Property value;
+        public readonly PropertyCondition propertyCondition;
 
         public Condition(string key, ConditionMode op, Property value)
         {
             this.key = key;
-            this.op = op;
-            this.value = value;
+            this.propertyCondition = new PropertyCondition()
+            {
+                op = op,
+                referenceValue = value,
+            };
         }
 
-        public bool Evaluate()
+        public bool Evaluate(IPropertyProvider properties)
         {
-            // todo
-            // Property curValue = Get(key);
-            Property curValue = default;
-            return false;
+            Property prop = properties.Get(key);
+            if (!prop.Valid())
+            {
+                return false;
+            }
+
+            return propertyCondition.EvaluateWith(prop);
         }
     }
 }

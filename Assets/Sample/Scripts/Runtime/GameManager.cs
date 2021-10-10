@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AillieoUtils.GOAP;
@@ -8,7 +7,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    [DefaultExecutionOrder(-1)]
+    //[DefaultExecutionOrder(-1)]
     public class GameManager : MonoBehaviour
     {
         private static GameManager ins;
@@ -36,26 +35,22 @@ namespace Sample
             }
         }
 
-
-        public readonly PropertyProvider worldStates = new PropertyProvider();
+        public readonly State worldStates = State.Create();
         public readonly List<Actor> actors = new List<Actor>();
+
+        public int GetItemCount(string itemType, string itemStatus)
+        {
+            return worldStates.properties.Get(ItemKeyUtils.GetKey(itemType, itemStatus));
+        }
+
+        public void SetItemCount(string itemType, string itemStatus, int count)
+        {
+            worldStates.properties.Set(ItemKeyUtils.GetKey(itemType, itemStatus), count);
+        }
 
         public IGraph<IAction> BuildLogicGraph()
         {
             throw new NotImplementedException();
-        }
-
-        private void Start()
-        {
-            foreach (var i in Enumerable.Range(0, 2))
-            {
-
-            }
-        }
-
-        private void Update()
-        {
-
         }
     }
 }

@@ -8,19 +8,22 @@ namespace AillieoUtils.GOAP
     public class Effect
     {
         public readonly string key;
-        public readonly ModifyMode op;
-        public readonly Property value;
+        public readonly PropertyModification propertyModification;
 
         public Effect(string key, ModifyMode op, Property value)
         {
             this.key = key;
-            this.op = op;
-            this.value = value;
+            this.propertyModification = new PropertyModification()
+            {
+                op = op,
+                operand = value,
+            };
         }
 
-        public void ApplyModifications()
+        public void ApplyModifications(IPropertyProvider properties)
         {
-
+            Property prop = properties.Get(key);
+            properties.Set(key, propertyModification.ApplyModification(prop));
         }
     }
 }

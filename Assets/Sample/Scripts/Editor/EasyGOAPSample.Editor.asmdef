@@ -1,9 +1,10 @@
 {
-    "name": "AillieoUtils.EasyGOAP.Editor",
+    "name": "EasyGOAPSample.Editor",
     "references": [
         "AillieoUtils.EasyFSM",
         "AillieoUtils.EasyGOAP",
-        "AillieoUtils.PropLogics"
+        "AillieoUtils.PropLogics",
+        "EasyGOAPSample"
     ],
     "includePlatforms": [
         "Editor"
