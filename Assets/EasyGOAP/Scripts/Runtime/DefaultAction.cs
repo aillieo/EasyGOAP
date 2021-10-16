@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AillieoUtils.GOAP
+namespace AillieoUtils.EasyGOAP
 {
     public abstract class DefaultAction : IAction
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using AillieoUtils.PropLogics;
 using UnityEngine;
 
-namespace AillieoUtils.GOAP
+namespace AillieoUtils.EasyGOAP
 {
     public class Effect
     {

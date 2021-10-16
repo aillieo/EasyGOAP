@@ -20,17 +20,4 @@ namespace Sample
         public const string Cooked = nameof(Cooked);
         public const string Plated = nameof(Plated);
     }
-
-    public static class ItemKeyUtils
-    {
-        public static string GetKey(string itemType, string itemStatus)
-        {
-            if (itemStatus == ItemStatus.Default)
-            {
-                return itemType;
-            }
-
-            return $"{itemType}_{itemStatus}";
-        }
-    }
 }

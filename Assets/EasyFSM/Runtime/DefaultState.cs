@@ -2,17 +2,17 @@ namespace AillieoUtils.FSM
 {
     public class DefaultState : IState
     {
-        public void OnEnter()
+        public void OnEnter(StateMachine stateMachine)
         {
 
         }
 
-        public void OnExit()
+        public void OnExit(StateMachine stateMachine)
         {
 
         }
 
-        public void OnUpdate(float deltaTime)
+        public void OnUpdate(StateMachine stateMachine, float deltaTime)
         {
 
         }

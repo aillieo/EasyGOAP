@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AillieoUtils.FSM
 {
-    public class Condition : ICondition
+    public class Condition
     {
         public readonly string key;
         public readonly PropertyCondition propertyCondition;

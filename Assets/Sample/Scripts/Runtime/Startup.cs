@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AillieoUtils.GOAP;
+using AillieoUtils.EasyGOAP;
 using AillieoUtils.PropLogics;
 using UnityEngine;
 
@@ -12,8 +12,6 @@ namespace Sample
     {
         [SerializeField]
         private StateAsset stateAsset;
-        [SerializeField]
-        private Actor actorTemplate;
 
         private void Start()
         {
@@ -22,12 +20,27 @@ namespace Sample
                 GameManager.Instance.worldStates.Update(stateAsset);
             }
 
-            foreach (var i in Enumerable.Range(0, 2))
+            Table[] tables = FindObjectsOfType<Table>();
+            if (tables != null)
             {
-                Actor a = GameObject.Instantiate(actorTemplate);
-                //a.transform.SetParent();
-                GameManager.Instance.actors.Add(a);
+                GameManager.Instance.tables.AddRange(tables);
+                foreach (var t in tables)
+                {
+                    StateHelper.SaveObjPosition(GameManager.Instance.worldStates, t);
+                }
             }
+
+            Actor[] actors = FindObjectsOfType<Actor>();
+            if (actors != null)
+            {
+                GameManager.Instance.actors.AddRange(actors);
+                foreach (var a in actors)
+                {
+                    StateHelper.SaveObjPosition(GameManager.Instance.worldStates, a);
+                }
+            }
+
+            GlobalDebugger.RecordState("GlobalState", GameManager.Instance.worldStates);
         }
     }
 }

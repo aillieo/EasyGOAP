@@ -7,15 +7,15 @@ namespace AillieoUtils.FSM
     internal class Transition
     {
         internal readonly IState toState;
-        private ICondition[] conditions;
+        private Condition[] conditions;
 
-        internal Transition(IState toState, ICondition[] conditions)
+        internal Transition(IState toState, Condition[] conditions)
         {
             this.toState = toState;
             this.conditions = conditions;
         }
 
-        internal bool CheckCondition()
+        internal bool CheckCondition(StateMachine stateMachine)
         {
             if (conditions == null || conditions.Length == 0)
             {

@@ -33,21 +33,8 @@ namespace Sample
 
         private void DrawOneEntry(SerializedProperty serializedProperty, Rect rect, int index, bool isActive, bool isFocused)
         {
-            float splitWidth = 0.05f;
-            float itemWidth = (1 - splitWidth) / 2;
-            Rect left = rect;
-            left.width = rect.width * itemWidth;
-            Rect middle = rect;
-            middle.x = left.x + left.width;
-            middle.width = rect.width * splitWidth;
-            Rect right = rect;
-            right.x = middle.x + middle.width;
-            right.width = rect.width * itemWidth;
-
             var element = serializedProperty.GetArrayElementAtIndex(index);
-            EditorGUI.PropertyField(left, element.FindPropertyRelative("key"), GUIContent.none);
-            EditorGUI.LabelField(middle, "");
-            EditorGUI.PropertyField(right, element.FindPropertyRelative("value"), GUIContent.none);
+            EditorGUI.PropertyField(rect, element, GUIContent.none);
         }
     }
 }

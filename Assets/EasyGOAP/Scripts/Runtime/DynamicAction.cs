@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AillieoUtils.GOAP
+namespace AillieoUtils.EasyGOAP
 {
     public class DynamicAction : IAction
     {

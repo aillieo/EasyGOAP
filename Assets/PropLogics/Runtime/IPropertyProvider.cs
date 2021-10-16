@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace AillieoUtils.PropLogics
 {
-    public interface IPropertyProvider : IEnumerable<KeyValuePair<string, Property>>
+    public interface IPropertyProvider : IEnumerable<PropertyPair>
     {
         bool HasKey(string key);
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AillieoUtils.GOAP
+namespace AillieoUtils.EasyGOAP
 {
     public class AgentDebugger : MonoBehaviour
     {

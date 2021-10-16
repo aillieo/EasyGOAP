@@ -1,15 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using AillieoUtils.PropLogics;
 using UnityEditor;
 using UnityEngine;
 
-namespace AillieoUtils.GOAP.Editor
+namespace AillieoUtils.EasyGOAP.Editor
 {
     [CustomPropertyDrawer(typeof(Property))]
     public class PropDrawer : PropertyDrawer
     {
+        private static PropertyInfo indentProperty = typeof(EditorGUI).GetProperty("indent", BindingFlags.NonPublic | BindingFlags.GetProperty | BindingFlags.Static);
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return EditorGUIUtility.singleLineHeight;
@@ -17,11 +20,19 @@ namespace AillieoUtils.GOAP.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            position = EditorGUI.PrefixLabel(position, label);
+            float indent = (float)indentProperty.GetValue(null);
+
+            position.x -= indent;
+            position.width += indent;
+            position.width += indent;
+
             Rect left = position;
             left.width = position.width / 2;
-            Rect right = position;
-            right.x = position.x + left.width;
-            right.width = position.width / 2;
+
+            Rect right = left;
+            right.x += left.width;
+            right.x -= indent;
 
             SerializedProperty type = property.FindPropertyRelative("type");
             SerializedProperty value = property.FindPropertyRelative("value");
@@ -32,6 +43,11 @@ namespace AillieoUtils.GOAP.Editor
             switch ((Property.ValueType)type.enumValueIndex)
             {
             case Property.ValueType.Invalid:
+                using (new EditorGUI.DisabledScope(true))
+                {
+                    EditorGUI.TextField(right, $"{intValue.intValue:X8}");
+                }
+
                 break;
             case Property.ValueType.Int:
                 intValue.intValue = EditorGUI.IntField(right, GUIContent.none, intValue.intValue);

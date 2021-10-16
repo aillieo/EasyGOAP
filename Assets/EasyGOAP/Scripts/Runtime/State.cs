@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AillieoUtils.PropLogics;
 using UnityEngine;
 
-namespace AillieoUtils.GOAP
+namespace AillieoUtils.EasyGOAP
 {
     public class State
     {
@@ -42,7 +41,7 @@ namespace AillieoUtils.GOAP
             State newState = Create();
             foreach (var pair in this.properties)
             {
-                newState.properties.Set(pair.Key, pair.Value);
+                newState.properties.Set(pair.key, pair.value);
             }
 
             return newState;
@@ -66,17 +65,17 @@ namespace AillieoUtils.GOAP
             properties.Set(key, stateValue);
         }
 
-        public void Update(IEnumerable<KeyValuePair<string, Property>> states)
+        public void Update(IEnumerable<PropertyPair> states)
         {
             foreach (var s in states)
             {
-                properties.Set(s.Key, s.Value);
+                properties.Set(s.key, s.value);
             }
         }
 
         public override string ToString()
         {
-            return string.Join("\n", properties.Select(pair => $"{pair.Key}={pair.Value}"));
+            return string.Join("\n", properties.Select(p => ToString()));
         }
     }
 }

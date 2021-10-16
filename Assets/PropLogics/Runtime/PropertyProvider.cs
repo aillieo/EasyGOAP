@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace AillieoUtils.PropLogics
 {
@@ -21,9 +22,9 @@ namespace AillieoUtils.PropLogics
             return Property.invalid;
         }
 
-        public IEnumerator<KeyValuePair<string, Property>> GetEnumerator()
+        public IEnumerator<PropertyPair> GetEnumerator()
         {
-            return dict.GetEnumerator();
+            return dict.Select(p => new PropertyPair(p.Key, p.Value)).GetEnumerator();
         }
 
         public bool HasKey(string key)
@@ -43,7 +44,6 @@ namespace AillieoUtils.PropLogics
 
         public void Set(string key, Property value)
         {
-            UnityEngine.Debug.LogError($"属性变化 {key} {Get(key)} -> {value}");
             dict[key] = value;
         }
 

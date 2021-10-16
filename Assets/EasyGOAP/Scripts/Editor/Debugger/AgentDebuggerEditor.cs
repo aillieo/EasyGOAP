@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace AillieoUtils.GOAP.Editor
+namespace AillieoUtils.EasyGOAP.Editor
 {
     [CustomEditor(typeof(AgentDebugger))]
     public class AgentDebuggerEditor : UnityEditor.Editor

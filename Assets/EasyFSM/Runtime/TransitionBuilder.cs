@@ -11,7 +11,7 @@ namespace AillieoUtils.FSM
         internal readonly IState toState;
 
         internal int priority = 0;
-        private HashSet<ICondition> conditions;
+        private HashSet<Condition> conditions;
 
         internal TransitionBuilder(IState fromState, IState toState)
         {
@@ -25,11 +25,11 @@ namespace AillieoUtils.FSM
             return this;
         }
 
-        public TransitionBuilder AddCondition(ICondition condition)
+        public TransitionBuilder AddCondition(Condition condition)
         {
             if (conditions == null)
             {
-                conditions = new HashSet<ICondition>();
+                conditions = new HashSet<Condition>();
             }
 
             conditions.Add(condition);

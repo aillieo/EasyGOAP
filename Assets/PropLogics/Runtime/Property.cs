@@ -10,7 +10,7 @@ namespace AillieoUtils.PropLogics
     {
         public Value value;
         public ValueType type;
-        public static readonly Property invalid = new Property() { type = ValueType.Invalid };
+        internal static readonly Property invalid = new Property() { type = ValueType.Invalid };
 
         public bool Valid()
         {
@@ -118,12 +118,17 @@ namespace AillieoUtils.PropLogics
                     return false;
                 }
 
-                if (this.type == ValueType.Invalid)
+                switch (this.type)
                 {
+                case ValueType.Invalid:
                     return true;
+                case ValueType.Int:
+                    return this.value.intValue == prop.value.intValue;
+                case ValueType.Float:
+                    return this.value.floatValue == prop.value.floatValue;
+                case ValueType.Bool:
+                    return this.value.boolValue == prop.value.boolValue;
                 }
-
-                return this.value.intValue == prop.value.intValue;
             }
 
             return false;

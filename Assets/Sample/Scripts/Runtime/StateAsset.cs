@@ -7,23 +7,16 @@ using UnityEngine;
 namespace Sample
 {
     [CreateAssetMenu(menuName = "EasyGOAPSample/StateAsset", fileName = "StateAsset")]
-    public class StateAsset : ScriptableObject, IEnumerable<KeyValuePair<string, Property>>
+    public class StateAsset : ScriptableObject, IEnumerable<PropertyPair>
     {
-        [Serializable]
-        public class Entry
-        {
-            public string key;
-            public Property value;
-        }
-
         [SerializeField]
-        private Entry[] entries;
+        private PropertyPair[] entries;
 
-        public IEnumerator<KeyValuePair<string, Property>> GetEnumerator()
+        public IEnumerator<PropertyPair> GetEnumerator()
         {
             foreach (var pair in entries)
             {
-                yield return new KeyValuePair<string, Property>(pair.key, pair.value);
+                yield return new PropertyPair(pair.key, pair.value);
             }
         }
 

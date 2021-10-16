@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AillieoUtils.GOAP;
-using AillieoUtils.PropLogics;
+using AillieoUtils.EasyGOAP;
 using UnityEngine;
 
 namespace Sample
@@ -37,16 +36,7 @@ namespace Sample
 
         public readonly State worldStates = State.Create();
         public readonly List<Actor> actors = new List<Actor>();
-
-        public int GetItemCount(string itemType, string itemStatus)
-        {
-            return worldStates.properties.Get(ItemKeyUtils.GetKey(itemType, itemStatus));
-        }
-
-        public void SetItemCount(string itemType, string itemStatus, int count)
-        {
-            worldStates.properties.Set(ItemKeyUtils.GetKey(itemType, itemStatus), count);
-        }
+        public readonly List<Table> tables = new List<Table>();
 
         public IGraph<IAction> BuildLogicGraph()
         {
