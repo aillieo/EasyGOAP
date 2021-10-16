@@ -125,9 +125,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 8783889424410744936}
-  itemName: 
-  itemStatus: 
-  itemCount: 0
+  entry:
+    key: 
+    value:
+      value:
+        intValue: 1074706514
+      type: 2
+  entries:
+  - key: 
+    value:
+      value:
+        intValue: 26
+      type: 1
+  - key: 
+    value:
+      value:
+        intValue: 0
+      type: 0
+  prop:
+    value:
+      intValue: 0
+    type: 2
+  props:
+  - value:
+      intValue: 0
+    type: 2
+  - value:
+      intValue: -1
+    type: 0
+  s1: 
+  s12:
+  - 
+  - 
 --- !u!1 &6198450751154846118
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +169,7 @@ GameObject:
   - component: {fileID: 7528753701970726522}
   - component: {fileID: 8783889424410744936}
   m_Layer: 0
-  m_Name: Label
+  m_Name: New Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

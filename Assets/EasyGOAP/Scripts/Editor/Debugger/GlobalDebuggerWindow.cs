@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using AillieoUtils.PropLogics;
 using UnityEditor;
+using UnityEngine;
 
 namespace AillieoUtils.EasyGOAP.Editor
 {
@@ -15,6 +17,7 @@ namespace AillieoUtils.EasyGOAP.Editor
 
         private Dictionary<string, StateRecordInfo> stateRecords = new Dictionary<string, StateRecordInfo>();
         private string filterStr;
+        private Vector2 scrollPos;
 
         [MenuItem("AillieoUtils/EasyGOAP/GlobalDebuggerWindow")]
         private static void OpenWindow()
@@ -29,10 +32,15 @@ namespace AillieoUtils.EasyGOAP.Editor
             filterStr = EditorGUILayout.TextField("Filter:", filterStr);
 
             var states = GlobalDebugger.states;
+
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+
             foreach (var s in states)
             {
                 OnGUIFor(s);
             }
+
+            EditorGUILayout.EndScrollView();
         }
 
         private void OnGUIFor(GlobalDebugger.StateInfo stateInfo)
@@ -49,7 +57,13 @@ namespace AillieoUtils.EasyGOAP.Editor
             if (stateRecord.expand)
             {
                 EditorGUI.indentLevel++;
-                foreach (var p in stateInfo.state.properties.Where(p => p.key.Contains(filterStr)))
+                IEnumerable<PropertyPair> properties = stateInfo.state.properties;
+                if (!string.IsNullOrEmpty(filterStr))
+                {
+                    properties = properties.Where(p => p.key.Contains(filterStr));
+                }
+
+                foreach (var p in properties)
                 {
                     EditorGUILayout.LabelField(p.ToString());
                 }

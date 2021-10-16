@@ -6,6 +6,7 @@ namespace AillieoUtils.EasyGOAP
 {
     public class Agent
     {
-
+        public IEnumerable<IAction> path;
+        public IAction curAction;
     }
 }

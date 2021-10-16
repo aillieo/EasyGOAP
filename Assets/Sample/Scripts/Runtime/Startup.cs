@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Sample
 {
-    //[DefaultExecutionOrder(-1)]
+    [DefaultExecutionOrder(-1)]
     public class Startup : MonoBehaviour
     {
         [SerializeField]

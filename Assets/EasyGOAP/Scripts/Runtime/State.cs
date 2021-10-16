@@ -2,49 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AillieoUtils.PropLogics;
-using UnityEngine;
 
 namespace AillieoUtils.EasyGOAP
 {
     public class State
     {
-
-        private static readonly Stack<State> pool = new Stack<State>();
-
-        public static State Create()
-        {
-            if (pool.Count > 0)
-            {
-                return pool.Pop();
-            }
-
-            return new State();
-        }
-
-        public static void Recycle(State state)
-        {
-            state.properties.Reset();
-            if (pool.Count < 128)
-            {
-                pool.Push(state);
-            }
-        }
-
-        private State()
-        {
-        }
-
         public readonly IPropertyProvider properties = new PropertyProvider();
 
-        public State Clone()
+        public void CloneFrom(State source)
         {
-            State newState = Create();
-            foreach (var pair in this.properties)
-            {
-                newState.properties.Set(pair.key, pair.value);
-            }
+            properties.Reset();
+            MergeFrom(source);
+        }
 
-            return newState;
+        public void MergeFrom(State source)
+        {
+            foreach (var pair in source.properties)
+            {
+                properties.Set(pair.key, pair.value);
+            }
         }
 
         public bool MeetConditions(IEnumerable<Condition> conditions)

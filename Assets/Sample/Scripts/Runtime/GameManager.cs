@@ -34,13 +34,23 @@ namespace Sample
             }
         }
 
-        public readonly State worldStates = State.Create();
+        public readonly State worldStates = new State();
         public readonly List<Actor> actors = new List<Actor>();
         public readonly List<Table> tables = new List<Table>();
+        private readonly Planner planner = new Planner();
 
-        public IGraph<IAction> BuildLogicGraph()
+        public IEnumerable<IAction> Find(IEnumerable<IAction> availableActions)
         {
-            throw new NotImplementedException();
+            //return planner.Find(worldStates, availableActions);
+
+            return new IAction[]
+            {
+                new A_BeefChopping(),
+                new A_BeefCooking(),
+                new A_TomatoChopping(),
+                new A_BurgerAssemblingTomato(),
+                new A_BurgerPlating(),
+            };
         }
     }
 }

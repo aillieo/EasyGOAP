@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using AillieoUtils.FSM;
 using AillieoUtils.EasyGOAP;
 using UnityEngine;
+using System.Linq;
 
 namespace Sample
 {
     public class Actor : MonoBehaviour
     {
         public string actorName;
-        [Range(0.1f, 2f)]
         public float speed;
 
         private readonly Agent agent = new Agent();
@@ -29,7 +29,9 @@ namespace Sample
         private void Start()
         {
             FSMBuilder builder = new FSMBuilder();
-            S_Move moveForBeef = new S_Move("Table_Beef_pos", this);
+
+            Table table = GameManager.Instance.tables[0];
+            S_Move moveForBeef = new S_Move(StateHelper.GetObjNameKey(table), this);
 
             builder.SetDefaultState(new DefaultState());
             builder.AddState(moveForBeef);
@@ -47,17 +49,21 @@ namespace Sample
 
         private void Update()
         {
-            stateMachine.Update(Time.deltaTime);
-
-            if (Time.frameCount % 10 != 0)
+            if (agent.path == null)
             {
-                return;
+                agent.path = GameManager.Instance.Find(actions);
             }
+
+            if (agent.curAction == null)
+            {
+                agent.curAction = agent.path.First();
+            }
+
+            stateMachine.Update(Time.deltaTime);
 
             IAction a = actions[UnityEngine.Random.Range(0, actions.Length)];
             if (GameManager.Instance.worldStates.MeetConditions(a.GetRequirements()))
             {
-                Debug.LogError($"执行动作 {a}");
                 GameManager.Instance.worldStates.ApplyModifications(a.GetEffects());
             }
         }

@@ -32,6 +32,7 @@ namespace Sample
             Vector2 newPos = Vector2.MoveTowards(agent.transform.position.ToVector2(), pos, agent.speed * deltaTime);
             agent.transform.position = newPos.ToVector3();
             StateHelper.SaveObjPosition(GameManager.Instance.worldStates, agent);
+            StateHelper.SaveDistanceToTarget(GameManager.Instance.worldStates, agent, positionName);
         }
     }
 }

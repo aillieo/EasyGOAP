@@ -6,9 +6,8 @@ namespace AillieoUtils.EasyGOAP
 {
     public class Planner
     {
-        public IEnumerable<IAction> Find()
+        public IEnumerable<IAction> Find(State initialState, IEnumerable<IAction> availableActions)
         {
-
             return null;
         }
     }
