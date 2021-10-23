@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using AillieoUtils.PropLogics;
 
 namespace AillieoUtils.FSM
@@ -12,15 +10,21 @@ namespace AillieoUtils.FSM
         internal readonly Dictionary<IState, Transition[]> transitions;
         internal readonly Transition[] anyStateTransitions;
 
-        internal readonly IPropertyProvider properties = new PropertyProvider();
+        internal readonly IPropertyProvider properties;
 
         private IState currentState;
 
         internal StateMachine(IState[] states, Dictionary<IState, Transition[]> transitions, Transition[] anyStateTransitions)
+            : this(states, transitions, anyStateTransitions, new PropertyProvider())
+        {
+        }
+
+        internal StateMachine(IState[] states, Dictionary<IState, Transition[]> transitions, Transition[] anyStateTransitions, IPropertyProvider customPropertyProvider)
         {
             this.states = states;
             this.transitions = transitions;
             this.anyStateTransitions = anyStateTransitions;
+            this.properties = customPropertyProvider;
         }
 
         public int GetInt(string key)
@@ -53,6 +57,16 @@ namespace AillieoUtils.FSM
             properties.Set(key, value);
         }
 
+        public IPropertyProvider GetAssociatedProperties()
+        {
+            return properties;
+        }
+
+        public IState GetCurrentState()
+        {
+            return currentState;
+        }
+
         public void Init()
         {
             if (currentState != null)
@@ -78,6 +92,11 @@ namespace AillieoUtils.FSM
                     {
                         foreach (Transition t in trans)
                         {
+                            if (t.toState == currentState)
+                            {
+                                continue;
+                            }
+
                             if (t.CheckCondition(this))
                             {
                                 hasTransition = true;
@@ -96,6 +115,11 @@ namespace AillieoUtils.FSM
                 {
                     foreach (Transition t in anyStateTransitions)
                     {
+                        if (t.toState == currentState)
+                        {
+                            continue;
+                        }
+
                         if (t.CheckCondition(this))
                         {
                             hasTransition = true;

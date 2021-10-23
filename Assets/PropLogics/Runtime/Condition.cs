@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using AillieoUtils.PropLogics;
-using UnityEngine;
 
-namespace AillieoUtils.EasyGOAP
+namespace AillieoUtils.PropLogics
 {
     public class Condition
     {
@@ -24,12 +20,27 @@ namespace AillieoUtils.EasyGOAP
         public bool Evaluate(IPropertyProvider properties)
         {
             Property prop = properties.Get(key);
-            if (!prop.Valid())
-            {
-                return false;
-            }
+            //if (!prop.Valid())
+            //{
+            //    return false;
+            //}
 
             return propertyCondition.EvaluateWith(prop);
         }
+
+        //public Condition And(Condition other)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Condition Or(Condition other)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public Condition Not()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

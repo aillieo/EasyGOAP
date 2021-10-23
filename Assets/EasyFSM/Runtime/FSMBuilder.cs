@@ -1,7 +1,6 @@
-using System.Collections;
+using AillieoUtils.PropLogics;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace AillieoUtils.FSM
@@ -12,6 +11,7 @@ namespace AillieoUtils.FSM
         private HashSet<IState> states = new HashSet<IState>();
         private HashSet<TransitionBuilder> transitions;
         private HashSet<TransitionBuilder> anyStateTransitions;
+        private IPropertyProvider customPropertyProvider;
 
         public FSMBuilder SetDefaultState(IState state)
         {
@@ -22,6 +22,12 @@ namespace AillieoUtils.FSM
         public FSMBuilder AddState(IState state)
         {
             states.Add(state);
+            return this;
+        }
+
+        public FSMBuilder BindCustomPropertyProvider(IPropertyProvider propertyProvider)
+        {
+            this.customPropertyProvider = propertyProvider;
             return this;
         }
 
@@ -57,12 +63,21 @@ namespace AillieoUtils.FSM
         {
             Assert.IsTrue(Validate());
 
-            StateMachine sm = new StateMachine(
-                states.OrderBy(s => s == defaultState ? 0 : 1).ToArray(),
-                transitions?.GroupBy(tr => tr.fromState).ToDictionary(pair => pair.Key, pair => pair.OrderBy(t => t.priority).Select(tb => tb.ToTransition()).ToArray()),
-                anyStateTransitions?.Select(tb => tb.ToTransition()).ToArray());
-
-            return sm;
+            if (customPropertyProvider != null)
+            {
+                return new StateMachine(
+                    states.OrderBy(s => s == defaultState ? 0 : 1).ToArray(),
+                    transitions?.GroupBy(tr => tr.fromState).ToDictionary(pair => pair.Key, pair => pair.OrderBy(t => t.priority).Select(tb => tb.ToTransition()).ToArray()),
+                    anyStateTransitions?.Select(tb => tb.ToTransition()).ToArray(),
+                    customPropertyProvider);
+            }
+            else
+            {
+                return new StateMachine(
+                    states.OrderBy(s => s == defaultState ? 0 : 1).ToArray(),
+                    transitions?.GroupBy(tr => tr.fromState).ToDictionary(pair => pair.Key, pair => pair.OrderBy(t => t.priority).Select(tb => tb.ToTransition()).ToArray()),
+                    anyStateTransitions?.Select(tb => tb.ToTransition()).ToArray());
+            }
         }
 
         public bool Validate()

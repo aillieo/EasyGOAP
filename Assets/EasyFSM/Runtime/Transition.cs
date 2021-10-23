@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using AillieoUtils.PropLogics;
 
 namespace AillieoUtils.FSM
 {
@@ -24,7 +22,7 @@ namespace AillieoUtils.FSM
 
             foreach (var c in conditions)
             {
-                if (!c.Evaluate())
+                if (!c.Evaluate(stateMachine.properties))
                 {
                     return false;
                 }

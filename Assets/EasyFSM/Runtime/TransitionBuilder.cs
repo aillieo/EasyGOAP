@@ -1,7 +1,6 @@
-using System.Collections;
+using AillieoUtils.PropLogics;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace AillieoUtils.FSM
 {
@@ -23,6 +22,11 @@ namespace AillieoUtils.FSM
         {
             this.priority = priority;
             return this;
+        }
+
+        public TransitionBuilder AddCondition(string key, ConditionMode op, Property value)
+        {
+            return AddCondition(new Condition(key, op, value));
         }
 
         public TransitionBuilder AddCondition(Condition condition)

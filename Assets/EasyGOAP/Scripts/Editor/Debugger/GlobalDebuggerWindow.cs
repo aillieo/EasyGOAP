@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AillieoUtils.PropLogics;
@@ -52,12 +50,12 @@ namespace AillieoUtils.EasyGOAP.Editor
                 stateRecords.Add(stateInfo.name, stateRecord);
             }
 
-            string title = stateRecord.expand ? stateInfo.name : $"{stateInfo.name}({stateInfo.state.properties.Count()})";
+            string title = stateRecord.expand ? stateInfo.name : $"{stateInfo.name}({stateInfo.state.Count()})";
             stateRecord.expand = EditorGUILayout.Foldout(stateRecord.expand, title);
             if (stateRecord.expand)
             {
                 EditorGUI.indentLevel++;
-                IEnumerable<PropertyPair> properties = stateInfo.state.properties;
+                IEnumerable<PropertyPair> properties = stateInfo.state;
                 if (!string.IsNullOrEmpty(filterStr))
                 {
                     properties = properties.Where(p => p.key.Contains(filterStr));

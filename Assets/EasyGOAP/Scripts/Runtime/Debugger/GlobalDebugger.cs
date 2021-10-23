@@ -1,6 +1,5 @@
-using System.Collections;
+using AillieoUtils.PropLogics;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AillieoUtils.EasyGOAP
 {
@@ -9,12 +8,12 @@ namespace AillieoUtils.EasyGOAP
         internal class StateInfo
         {
             public string name;
-            public State state;
+            public IPropertyProvider state;
         }
 
         internal static readonly List<StateInfo> states = new List<StateInfo>();
 
-        public static void RecordState(string key, State state)
+        public static void RecordState(string key, IPropertyProvider state)
         {
             for (int i = states.Count - 1; i >= 0; --i)
             {

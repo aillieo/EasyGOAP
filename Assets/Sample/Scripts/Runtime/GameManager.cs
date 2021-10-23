@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using AillieoUtils.EasyGOAP;
 using UnityEngine;
 
@@ -34,10 +32,37 @@ namespace Sample
             }
         }
 
-        public readonly State worldStates = new State();
-        public readonly List<Actor> actors = new List<Actor>();
-        public readonly List<Table> tables = new List<Table>();
+        public readonly World world = new World();
         private readonly Planner planner = new Planner();
+        private readonly Dictionary<int, SceneObj> objMappings = new Dictionary<int, SceneObj>();
+        private readonly Dictionary<string, int> tables = new Dictionary<string, int>();
+
+        public void RecordSceneObj(int id, SceneObj sceneObj)
+        {
+            objMappings[id] = sceneObj;
+            if (sceneObj is Table t)
+            {
+                tables[StateHelper.HashItemKey(t.itemName, t.itemStatus)] = id;
+            }
+        }
+
+        public int GetTableForItem(string tableKey)
+        {
+            if (tables.TryGetValue(tableKey, out int tableObjId))
+            {
+                return tableObjId;
+            }
+            return 0;
+        }
+
+        public SceneObj GetSceneObj(int id)
+        {
+            if(objMappings.TryGetValue(id, out SceneObj obj))
+            {
+                return obj;
+            }
+            return null;
+        }
 
         public IEnumerable<IAction> Find(IEnumerable<IAction> availableActions)
         {

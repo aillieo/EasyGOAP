@@ -1,20 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using AillieoUtils.FSM;
 using AillieoUtils.EasyGOAP;
 using UnityEngine;
 using System.Linq;
+using AillieoUtils.PropLogics;
 
 namespace Sample
 {
-    public class Actor : MonoBehaviour
+    public class Actor : SceneObj
     {
         public string actorName;
         public float speed;
 
-        private readonly Agent agent = new Agent();
-        private StateMachine stateMachine;
+        [NonSerialized]
+        public Agent agent;
 
         private static IAction[] actions = new IAction[]
         {
@@ -28,44 +26,20 @@ namespace Sample
 
         private void Start()
         {
-            FSMBuilder builder = new FSMBuilder();
+            agent = GameManager.Instance.world.CreateAgent();
+            agent.AddAvailableActions(actions);
 
-            Table table = GameManager.Instance.tables[0];
-            S_Move moveForBeef = new S_Move(StateHelper.GetObjNameKey(table), this);
-
-            builder.SetDefaultState(new DefaultState());
-            builder.AddState(moveForBeef);
-
-            //    .CreateTransition(move,)
-
-            stateMachine = builder.ToStateMachine();
-            stateMachine.Init();
+            agent.Init();
         }
 
         private void OnDestroy()
         {
-            stateMachine.CleanUp();
+            agent.CleanUp();
         }
 
         private void Update()
         {
-            if (agent.path == null)
-            {
-                agent.path = GameManager.Instance.Find(actions);
-            }
-
-            if (agent.curAction == null)
-            {
-                agent.curAction = agent.path.First();
-            }
-
-            stateMachine.Update(Time.deltaTime);
-
-            IAction a = actions[UnityEngine.Random.Range(0, actions.Length)];
-            if (GameManager.Instance.worldStates.MeetConditions(a.GetRequirements()))
-            {
-                GameManager.Instance.worldStates.ApplyModifications(a.GetEffects());
-            }
+            agent.Update(Time.deltaTime);
         }
     }
 }

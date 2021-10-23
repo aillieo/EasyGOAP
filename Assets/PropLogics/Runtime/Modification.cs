@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using AillieoUtils.PropLogics;
-using UnityEngine;
-
-namespace AillieoUtils.EasyGOAP
+namespace AillieoUtils.PropLogics
 {
-    public class Effect
+    public class Modification
     {
         public readonly string key;
         public readonly PropertyModification propertyModification;
 
-        public Effect(string key, ModifyMode op, Property value)
+        public Modification(string key, ModifyMode op, Property value)
         {
             this.key = key;
             this.propertyModification = new PropertyModification()

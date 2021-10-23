@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AillieoUtils.EasyGOAP;
 using AillieoUtils.PropLogics;
 using UnityEngine;
@@ -17,30 +14,41 @@ namespace Sample
         {
             if (stateAsset != null)
             {
-                GameManager.Instance.worldStates.Update(stateAsset);
+                GameManager.Instance.world.GetWorldState().Update(stateAsset);
             }
 
             Table[] tables = FindObjectsOfType<Table>();
             if (tables != null)
             {
-                GameManager.Instance.tables.AddRange(tables);
                 foreach (var t in tables)
                 {
-                    StateHelper.SaveObjPosition(GameManager.Instance.worldStates, t);
+                    GameManager.Instance.RecordSceneObj(t.GetInstanceID(), t);
+                    StateHelper.SaveObjPosition(GameManager.Instance.world.GetWorldState(), t);
                 }
             }
 
             Actor[] actors = FindObjectsOfType<Actor>();
             if (actors != null)
             {
-                GameManager.Instance.actors.AddRange(actors);
                 foreach (var a in actors)
                 {
-                    StateHelper.SaveObjPosition(GameManager.Instance.worldStates, a);
+                    GameManager.Instance.RecordSceneObj(a.GetInstanceID(), a);
+                    StateHelper.SaveObjPosition(GameManager.Instance.world.GetWorldState(), a);
                 }
             }
 
-            GlobalDebugger.RecordState("GlobalState", GameManager.Instance.worldStates);
+            if (actors != null && tables != null)
+            {
+                foreach(var a in actors)
+                {
+                    foreach(var t in tables)
+                    {
+                        StateHelper.SaveDistanceToTarget(GameManager.Instance.world.GetWorldState(), a, t);
+                    }
+                }
+            }
+
+            GlobalDebugger.RecordState("GlobalState", GameManager.Instance.world.GetWorldState());
         }
     }
 }

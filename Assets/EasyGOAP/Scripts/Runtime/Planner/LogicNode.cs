@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AillieoUtils.EasyGOAP
 {
@@ -21,7 +19,7 @@ namespace AillieoUtils.EasyGOAP
 
         public static void Recycle(LogicNode node)
         {
-            node.state.properties.Reset();
+            node.state.Reset();
             node.action = null;
             node.previous = null;
             node.g = 0;
@@ -37,7 +35,7 @@ namespace AillieoUtils.EasyGOAP
         {
         }
 
-        internal State state = new State();
+        internal WorldState state = new WorldState();
         internal IAction action;
 
         internal LogicNode previous;
