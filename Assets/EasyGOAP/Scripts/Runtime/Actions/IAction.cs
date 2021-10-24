@@ -5,18 +5,16 @@ namespace AillieoUtils.EasyGOAP
 {
     public interface IAction
     {
-        WorldState GetAssociatedState();
+        IEnumerable<Condition> GetRequirements(Agent agent);
 
-        IEnumerable<Condition> GetRequirements();
+        IEnumerable<Modification> GetEffects(Agent agent);
 
-        IEnumerable<Modification> GetEffects();
+        float GetCost(Agent agent);
 
-        float GetCost();
+        ActionResult Execute(Agent agent, float deltaTime);
 
-        ActionResult Execute(float deltaTime);
+        void OnBeginExecute(Agent agent);
 
-        void OnBeginExecute();
-
-        void OnEndExecute(ActionResult result);
+        void OnEndExecute(Agent agent, ActionResult result);
     }
 }

@@ -18,39 +18,34 @@ namespace AillieoUtils.EasyGOAP
             this.cost = cst;
         }
 
-        public IEnumerable<Condition> GetRequirements()
+        public IEnumerable<Condition> GetRequirements(Agent agent)
         {
             return requirements;
         }
 
-        public IEnumerable<Modification> GetEffects()
+        public IEnumerable<Modification> GetEffects(Agent agent)
         {
             return effects;
         }
 
-        public float GetCost()
+        public float GetCost(Agent agent)
         {
             return cost;
         }
 
-        public ActionResult Execute(float deltaTime)
+        public ActionResult Execute(Agent agent, float deltaTime)
         {
             throw new System.NotImplementedException();
         }
 
-        public void OnBeginExecute()
+        public void OnBeginExecute(Agent agent)
         {
             throw new System.NotImplementedException();
         }
 
-        public void OnEndExecute(ActionResult result)
+        public void OnEndExecute(Agent agent, ActionResult result)
         {
             throw new System.NotImplementedException();
-        }
-
-        public WorldState GetAssociatedState()
-        {
-            return this.state;
         }
     }
 }

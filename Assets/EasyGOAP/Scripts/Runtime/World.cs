@@ -21,9 +21,14 @@ namespace AillieoUtils.EasyGOAP
             return worldState;
         }
 
-        public IEnumerable<IAction> FindPath(Goal goal, IEnumerable<IAction> availableActions)
+        public Planner GetPlanner()
         {
-            return planner.FindPath(worldState, goal, availableActions);
+            return planner;
+        }
+
+        public IEnumerable<IAction> FindPath(Agent agent, Goal goal, IEnumerable<IAction> availableActions)
+        {
+            return planner.FindPath(agent, worldState, goal, availableActions);
         }
     }
 }

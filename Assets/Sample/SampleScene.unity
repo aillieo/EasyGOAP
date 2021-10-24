@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Plating
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -151,7 +156,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -279,6 +284,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemName
+      value: Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemStatus
+      value: Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Cheese
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -302,7 +322,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -357,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 633941408068774061, guid: 889304bc043f44a65b4b014eeb209dfc,
         type: 3}
       propertyPath: speed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7396755061836877631, guid: 889304bc043f44a65b4b014eeb209dfc,
         type: 3}
@@ -422,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 9212724968162772596, guid: 889304bc043f44a65b4b014eeb209dfc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 889304bc043f44a65b4b014eeb209dfc, type: 3}
@@ -624,6 +644,11 @@ PrefabInstance:
       propertyPath: itemStatus
       value: Raw
       objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Beef
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -647,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -699,6 +724,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Cooker
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -722,7 +752,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -774,6 +804,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Assembling
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -797,7 +832,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -943,6 +978,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemName
+      value: Bun
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemStatus
+      value: Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Bun
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -966,7 +1016,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -1021,7 +1071,7 @@ PrefabInstance:
     - target: {fileID: 633941408068774061, guid: 889304bc043f44a65b4b014eeb209dfc,
         type: 3}
       propertyPath: speed
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7396755061836877631, guid: 889304bc043f44a65b4b014eeb209dfc,
         type: 3}
@@ -1154,7 +1204,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
@@ -1244,6 +1294,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1759679131}
     m_Modifications:
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemName
+      value: Tomato
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: itemStatus
+      value: Raw
+      objectReference: {fileID: 0}
+    - target: {fileID: 2960975815456887394, guid: fe728d8795958624a8f95a1a3de5eb96,
+        type: 3}
+      propertyPath: tableName
+      value: Tomato
+      objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282860, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_Name
@@ -1267,7 +1332,7 @@ PrefabInstance:
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4586143557785282861, guid: fe728d8795958624a8f95a1a3de5eb96,
         type: 3}

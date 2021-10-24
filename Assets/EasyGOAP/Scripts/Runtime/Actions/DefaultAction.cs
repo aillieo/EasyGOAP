@@ -1,5 +1,6 @@
 using AillieoUtils.PropLogics;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace AillieoUtils.EasyGOAP
 {
@@ -11,19 +12,19 @@ namespace AillieoUtils.EasyGOAP
         private bool hasData = false;
         private float timer;
 
-        public IEnumerable<Condition> GetRequirements()
+        public IEnumerable<Condition> GetRequirements(Agent agent)
         {
             EnsureData();
             return requirements;
         }
 
-        public IEnumerable<Modification> GetEffects()
+        public IEnumerable<Modification> GetEffects(Agent agent)
         {
             EnsureData();
             return effects;
         }
 
-        public float GetCost()
+        public float GetCost(Agent agent)
         {
             EnsureData();
             return cost;
@@ -42,16 +43,16 @@ namespace AillieoUtils.EasyGOAP
             hasData = true;
         }
 
-        public virtual ActionResult Execute(float deltaTime)
+        public virtual ActionResult Execute(Agent agent, float deltaTime)
         {
             EnsureData();
 
-            if (!GetAssociatedState().MeetConditions(GetRequirements()))
+            if (!agent.GetWorld().GetWorldState().MeetConditions(GetRequirements(agent)))
             {
                 return ActionResult.Failed;
             }
 
-            timer += deltaTime * 10;
+            timer += deltaTime;
 
             if (timer >= cost)
             {
@@ -63,21 +64,23 @@ namespace AillieoUtils.EasyGOAP
             }
         }
 
-        public virtual void OnBeginExecute()
+        public virtual void OnBeginExecute(Agent agent)
         {
             UnityEngine.Debug.LogError($"Begin {GetType()}");
             EnsureData();
             timer = 0;
         }
 
-        public virtual void OnEndExecute(ActionResult result)
+        public virtual void OnEndExecute(Agent agent, ActionResult result)
         {
             EnsureData();
+
+            if (result == ActionResult.Success)
+            {
+                agent.GetWorld().GetWorldState().ApplyModifications(GetEffects(agent));
+            }
+
             timer = 0;
-
-            UnityEngine.Debug.LogError($"End {GetType()}");
         }
-
-        public abstract WorldState GetAssociatedState();
     }
 }

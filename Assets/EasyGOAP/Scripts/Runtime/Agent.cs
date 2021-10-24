@@ -1,3 +1,4 @@
+using System;
 using AillieoUtils.FSM;
 using AillieoUtils.PropLogics;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace AillieoUtils.EasyGOAP
 
         private Vector2 position;
         public float moveSpeed;
+        private Goal curGoal;
 
         private IEnumerable<IAction> path;
         private IEnumerator<IAction> cursor;
@@ -40,7 +42,7 @@ namespace AillieoUtils.EasyGOAP
 
             stateMachine = builder.ToStateMachine();
 
-            GlobalDebugger.RecordState($"Agent", stateMachine.GetAssociatedProperties());
+            GlobalDebugger.RecordState($"Agent{GetHashCode()}", stateMachine.GetAssociatedProperties());
         }
 
         public void AddAvailableAction(IAction action)
@@ -51,6 +53,16 @@ namespace AillieoUtils.EasyGOAP
         public void AddAvailableActions(IEnumerable<IAction> actions)
         {
             availableActions.AddRange(actions);
+        }
+
+        public bool RemoveAction(IAction action)
+        {
+            return availableActions.Remove(action);
+        }
+
+        public int RemoveAllActionsForType(Type type)
+        {
+            return availableActions.RemoveAll(a => a.GetType() == type);
         }
 
         public void Init()
@@ -72,7 +84,7 @@ namespace AillieoUtils.EasyGOAP
         {
             if (path == null)
             {
-                path = belongingWorld.FindPath(null, availableActions);
+                path = belongingWorld.FindPath(this,curGoal, availableActions);
             }
 
             if (cursor == null)
@@ -87,7 +99,7 @@ namespace AillieoUtils.EasyGOAP
         {
             if (path == null)
             {
-                path = belongingWorld.FindPath(null, availableActions);
+                path = belongingWorld.FindPath(this, curGoal, availableActions);
             }
 
             if (cursor == null)
@@ -96,6 +108,31 @@ namespace AillieoUtils.EasyGOAP
             }
 
             return cursor.MoveNext();
+        }
+
+        public void Replan()
+        {
+
+        }
+
+        public World GetWorld()
+        {
+            return belongingWorld;
+        }
+
+        public StateMachine GetStateMachine()
+        {
+            return stateMachine;
+        }
+
+        public void SetGoal(Goal goal)
+        {
+            curGoal = goal;
+        }
+
+        public Goal GetCurGoal()
+        {
+            return curGoal;
         }
 
         public void Update(float deltaTime)

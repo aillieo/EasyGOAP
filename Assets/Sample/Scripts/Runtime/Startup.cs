@@ -22,30 +22,13 @@ namespace Sample
             {
                 foreach (var t in tables)
                 {
-                    GameManager.Instance.RecordSceneObj(t.GetInstanceID(), t);
-                    StateHelper.SaveObjPosition(GameManager.Instance.world.GetWorldState(), t);
+                    GameManager.Instance.RecordTable(t.tableName, t);
                 }
             }
 
             Actor[] actors = FindObjectsOfType<Actor>();
             if (actors != null)
             {
-                foreach (var a in actors)
-                {
-                    GameManager.Instance.RecordSceneObj(a.GetInstanceID(), a);
-                    StateHelper.SaveObjPosition(GameManager.Instance.world.GetWorldState(), a);
-                }
-            }
-
-            if (actors != null && tables != null)
-            {
-                foreach(var a in actors)
-                {
-                    foreach(var t in tables)
-                    {
-                        StateHelper.SaveDistanceToTarget(GameManager.Instance.world.GetWorldState(), a, t);
-                    }
-                }
             }
 
             GlobalDebugger.RecordState("GlobalState", GameManager.Instance.world.GetWorldState());

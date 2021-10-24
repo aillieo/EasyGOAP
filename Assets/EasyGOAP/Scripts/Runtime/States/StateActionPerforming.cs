@@ -5,7 +5,6 @@ namespace AillieoUtils.EasyGOAP
 {
     public class StateActionPerforming : IState
     {
-        private ActionResult result;
         public readonly Agent agent;
 
         public StateActionPerforming(Agent agent)
@@ -25,7 +24,7 @@ namespace AillieoUtils.EasyGOAP
                 return;
             }
 
-            action.OnBeginExecute();
+            action.OnBeginExecute(agent);
         }
 
         public void OnExit(StateMachine stateMachine)
@@ -37,7 +36,8 @@ namespace AillieoUtils.EasyGOAP
                 return;
             }
 
-            action.OnEndExecute(result);
+            ActionResult result = (ActionResult)stateMachine.GetInt(InternalKeys.actionResult);
+            action.OnEndExecute(agent, result);
 
             UnityEngine.Debug.LogError($"Exit action  {action}");
         }
@@ -46,15 +46,13 @@ namespace AillieoUtils.EasyGOAP
         {
             IAction action = agent.GetCurAction();
 
-            UnityEngine.Debug.LogError($"Update action  {action}");
-
             if (action == null)
             {
                 stateMachine.SetInt(InternalKeys.actionResult, (int)ActionResult.Failed);
                 return;
             }
 
-            result = action.Execute(deltaTime);
+            ActionResult result = action.Execute(agent, deltaTime);
 
             if (result != ActionResult.Unfinished)
             {

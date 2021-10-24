@@ -29,6 +29,8 @@ namespace Sample
             agent = GameManager.Instance.world.CreateAgent();
             agent.AddAvailableActions(actions);
 
+            agent.moveSpeed = speed;
+            agent.SetGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 1)));
             agent.Init();
         }
 
@@ -40,6 +42,11 @@ namespace Sample
         private void Update()
         {
             agent.Update(Time.deltaTime);
+        }
+
+        private void LateUpdate()
+        {
+            transform.position = agent.GetPosition().ToVector3();
         }
     }
 }

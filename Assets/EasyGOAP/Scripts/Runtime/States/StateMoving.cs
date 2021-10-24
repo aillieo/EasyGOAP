@@ -31,8 +31,6 @@ namespace AillieoUtils.EasyGOAP
             Vector2 newPos = Vector2.MoveTowards(agent.GetPosition(), targetPos, agent.moveSpeed * deltaTime);
             agent.SetPosition(newPos);
             stateMachine.SetFloat(InternalKeys.distanceToTarget, Vector2.Distance(newPos, targetPos));
-
-            Debug.LogError("Update moving");
         }
     }
 }
