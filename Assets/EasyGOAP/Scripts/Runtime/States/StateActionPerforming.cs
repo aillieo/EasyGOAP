@@ -16,8 +16,6 @@ namespace AillieoUtils.EasyGOAP
         {
             IAction action = agent.GetCurAction();
 
-            UnityEngine.Debug.LogError($"Enter action  {action}");
-
             if (action == null)
             {
                 stateMachine.SetInt(InternalKeys.actionResult, (int)ActionResult.Failed);
@@ -38,8 +36,6 @@ namespace AillieoUtils.EasyGOAP
 
             ActionResult result = (ActionResult)stateMachine.GetInt(InternalKeys.actionResult);
             action.OnEndExecute(agent, result);
-
-            UnityEngine.Debug.LogError($"Exit action  {action}");
         }
 
         public void OnUpdate(StateMachine stateMachine, float deltaTime)
@@ -57,7 +53,7 @@ namespace AillieoUtils.EasyGOAP
             if (result != ActionResult.Unfinished)
             {
                 // 任务完成了
-                Debug.LogError("finished ...");
+                //Debug.Log("finished ...");
             }
             stateMachine.SetInt(InternalKeys.actionResult, (int)result);
         }

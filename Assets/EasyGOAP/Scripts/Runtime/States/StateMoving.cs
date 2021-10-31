@@ -17,12 +17,10 @@ namespace AillieoUtils.EasyGOAP
 
         public void OnEnter(StateMachine stateMachine)
         {
-            Debug.LogError("Enter moving");
         }
 
         public void OnExit(StateMachine stateMachine)
         {
-            Debug.LogError("Exit moving");
         }
 
         public void OnUpdate(StateMachine stateMachine, float deltaTime)

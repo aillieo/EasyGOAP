@@ -27,7 +27,7 @@ namespace AillieoUtils.EasyGOAP
                 LogicNode top = queue.Dequeue();
                 processedNodes.Add(top);
 
-                if (goal.condition.Evaluate(top.state))
+                if (goal.Reached(top.state))
                 {
                     break;
                 }
@@ -63,7 +63,7 @@ namespace AillieoUtils.EasyGOAP
 
             actions.Reverse();
 
-            Debug.LogError(string.Join("\n", actions.Select(a=>a.GetType().Name)));
+            Debug.Log(string.Join("\n", actions.Select(a=>a.GetType().Name)));
             return actions;
         }
     }

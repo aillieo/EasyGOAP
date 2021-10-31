@@ -30,7 +30,13 @@ namespace Sample
             agent.AddAvailableActions(actions);
 
             agent.moveSpeed = speed;
-            agent.SetGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 1)));
+
+            agent.AddOrUpdateGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 1)), 5);
+            agent.AddOrUpdateGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 2)), 4);
+            agent.AddOrUpdateGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 3)), 3);
+            agent.AddOrUpdateGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 4)), 2);
+            agent.AddOrUpdateGoal(new Goal(new Condition(StateHelper.HashItemKey(ItemTypes.Burger, ItemStatus.Plated), ConditionMode.GreaterEqual, 5)), 1);
+
             agent.Init();
         }
 

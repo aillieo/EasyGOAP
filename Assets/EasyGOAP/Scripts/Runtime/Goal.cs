@@ -4,17 +4,38 @@ namespace AillieoUtils.EasyGOAP
 {
     public class Goal
     {
-        public readonly Condition condition;
-        public float weight = 1f;
+        private readonly Condition condition;
 
         public Goal(Condition condition)
         {
             this.condition = condition;
         }
 
-        public bool Reached()
+        public Goal(string key, ConditionMode op, Property value)
+            : this(new Condition(key, op, value))
         {
-            return condition.Evaluate(null);
+        }
+
+        public bool Reached(WorldState state)
+        {
+            return condition.Evaluate(state);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Goal other)
+            {
+                return this.condition.Equals(other.condition);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return condition.GetHashCode();
         }
     }
 }

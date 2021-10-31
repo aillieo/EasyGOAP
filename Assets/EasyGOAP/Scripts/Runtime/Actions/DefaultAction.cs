@@ -66,7 +66,6 @@ namespace AillieoUtils.EasyGOAP
 
         public virtual void OnBeginExecute(Agent agent)
         {
-            UnityEngine.Debug.LogError($"Begin {GetType()}");
             EnsureData();
             timer = 0;
         }

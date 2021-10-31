@@ -2,8 +2,8 @@ using System;
 using AillieoUtils.FSM;
 using AillieoUtils.PropLogics;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
 namespace AillieoUtils.EasyGOAP
 {
@@ -12,6 +12,7 @@ namespace AillieoUtils.EasyGOAP
         private readonly StateMachine stateMachine;
         private readonly World belongingWorld;
         private readonly List<IAction> availableActions = new List<IAction>();
+        private readonly Dictionary<Goal, float> availableGoals = new Dictionary<Goal, float>();
 
         private Vector2 position;
         public float moveSpeed;
@@ -84,7 +85,12 @@ namespace AillieoUtils.EasyGOAP
         {
             if (path == null)
             {
-                path = belongingWorld.FindPath(this,curGoal, availableActions);
+                Goal g = GetCurGoal();
+                if (g == null)
+                {
+                    return null;
+                }
+                path = belongingWorld.FindPath(this, g, availableActions);
             }
 
             if (cursor == null)
@@ -95,11 +101,16 @@ namespace AillieoUtils.EasyGOAP
             return cursor.Current;
         }
 
-        public bool NextAction()
+        internal bool NextAction()
         {
             if (path == null)
             {
-                path = belongingWorld.FindPath(this, curGoal, availableActions);
+                Goal g = GetCurGoal();
+                if (g == null)
+                {
+                    return false;
+                }
+                path = belongingWorld.FindPath(this, g, availableActions);
             }
 
             if (cursor == null)
@@ -107,12 +118,13 @@ namespace AillieoUtils.EasyGOAP
                 cursor = path.GetEnumerator();
             }
 
-            return cursor.MoveNext();
-        }
+            bool hasNext = cursor.MoveNext();
+            if (!hasNext)
+            {
+                ResetGoal();
+            }
 
-        public void Replan()
-        {
-
+            return hasNext;
         }
 
         public World GetWorld()
@@ -125,14 +137,79 @@ namespace AillieoUtils.EasyGOAP
             return stateMachine;
         }
 
-        public void SetGoal(Goal goal)
+        public void AddGoal(Goal goal)
         {
-            curGoal = goal;
+            AddOrUpdateGoal(goal, 1);
+        }
+
+        public void AddOrUpdateGoal(Goal goal, float weight)
+        {
+            availableGoals[goal] = weight;
+            if (curGoal != null && availableGoals[curGoal] < weight)
+            {
+                ResetGoal();
+            }
+        }
+
+        public IEnumerable<KeyValuePair<Goal, float>> GetAllGoals()
+        {
+            return availableGoals;
+        }
+
+        public bool RemoveGoal(Goal goal)
+        {
+            if (goal == curGoal)
+            {
+                ResetGoal();
+            }
+
+            return availableGoals.Remove(goal);
+        }
+
+        public int RemoveGoal(Func<Goal, bool> filter)
+        {
+            List<Goal> toRemove = new List<Goal>();
+            foreach (var pair in availableGoals)
+            {
+                if (filter(pair.Key))
+                {
+                    toRemove.Add(pair.Key);
+                }
+            }
+
+            int count = 0;
+            foreach (var goal in toRemove)
+            {
+                if (RemoveGoal(goal))
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public Goal GetCurGoal()
         {
+            if (curGoal == null)
+            {
+                var notReached = availableGoals.Where(g => !g.Key.Reached(belongingWorld.GetWorldState()));
+                if (!notReached.Any())
+                {
+                    return null;
+                }
+
+                curGoal = notReached.OrderByDescending(g => g.Value).First().Key;
+            }
+
             return curGoal;
+        }
+
+        internal void ResetGoal()
+        {
+            curGoal = null;
+            path = null;
+            cursor = null;
         }
 
         public void Update(float deltaTime)
