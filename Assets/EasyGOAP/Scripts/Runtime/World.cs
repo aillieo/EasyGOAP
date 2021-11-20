@@ -8,8 +8,13 @@ namespace AillieoUtils.EasyGOAP
 {
     public class World
     {
+        public World(IPlanner planner)
+        {
+            this.planner = planner;
+        }
+
         private readonly WorldState worldState = new WorldState();
-        private readonly Planner planner = new Planner();
+        private readonly IPlanner planner;
 
         public Agent CreateAgent()
         {
@@ -21,7 +26,7 @@ namespace AillieoUtils.EasyGOAP
             return worldState;
         }
 
-        public Planner GetPlanner()
+        public IPlanner GetPlanner()
         {
             return planner;
         }

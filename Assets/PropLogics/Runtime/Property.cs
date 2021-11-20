@@ -141,5 +141,15 @@ namespace AillieoUtils.PropLogics
 
             return this.type.GetHashCode() ^ this.value.intValue.GetHashCode() << 2;
         }
+
+        public static bool operator ==(Property lhs, Property rhs)
+        {
+            return lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(Property lhs, Property rhs)
+        {
+            return !lhs.Equals(rhs);
+        }
     }
 }

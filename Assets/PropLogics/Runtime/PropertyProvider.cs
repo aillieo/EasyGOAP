@@ -50,5 +50,38 @@ namespace AillieoUtils.PropLogics
         {
             return GetEnumerator();
         }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is PropertyProvider pp))
+            {
+                return false;
+            }
+
+            if (pp.dict.Count != dict.Count)
+            {
+                return false;
+            }
+
+            foreach (var pair in dict)
+            {
+                if (!pp.dict.TryGetValue(pair.Key, out Property v))
+                {
+                    return false;
+                }
+
+                if (v != pair.Value)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return dict.GetHashCode();
+        }
     }
 }

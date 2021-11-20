@@ -33,7 +33,7 @@ namespace Sample
             }
         }
 
-        public readonly World world = new World();
+        public readonly World world = new World(new PlannerAStar(new HeuristicSample()));
         private readonly Dictionary<string, Table> tables = new Dictionary<string, Table>();
 
         public void RecordTable(string tableKey, Table table)

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AillieoUtils.PropLogics;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace AillieoUtils.EasyGOAP
 {
-    public class Planner
+    public class PlannerBFS : IPlanner
     {
         public IEnumerable<IAction> FindPath(Agent agent, WorldState initialState, Goal goal, IEnumerable<IAction> availableActions)
         {
@@ -65,6 +64,18 @@ namespace AillieoUtils.EasyGOAP
 
             Debug.Log(string.Join("\n", actions.Select(a=>a.GetType().Name)));
             return actions;
+        }
+
+        private IEnumerable<IAction> AStar(Agent agent, WorldState initialState, Goal goal, IEnumerable<IAction> availableActions)
+        {
+            HashSet<LogicNode> nodes = new HashSet<LogicNode>();
+            return default;
+        }
+
+        private static int Heuristic(WorldState state)
+        {
+
+            return 0;
         }
     }
 }

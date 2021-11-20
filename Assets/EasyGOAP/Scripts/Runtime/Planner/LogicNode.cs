@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace AillieoUtils.EasyGOAP
 {
-    public class LogicNode
+    public class LogicNode : IComparable<LogicNode>
     {
         public static int poolSize = 128;
         private static readonly Stack<LogicNode> pool = new Stack<LogicNode>();
@@ -31,11 +32,16 @@ namespace AillieoUtils.EasyGOAP
             }
         }
 
+        public int CompareTo(LogicNode other)
+        {
+            return (g + h).CompareTo(other.g + other.h);
+        }
+
         private LogicNode()
         {
         }
 
-        internal WorldState state = new WorldState();
+        internal readonly WorldState state = new WorldState();
         internal IAction action;
 
         internal LogicNode previous;
