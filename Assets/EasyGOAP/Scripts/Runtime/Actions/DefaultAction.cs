@@ -6,16 +6,16 @@ namespace AillieoUtils.EasyGOAP
 {
     public abstract class DefaultAction : IAction
     {
-        private Condition[] requirements;
+        private Condition[] preconditions;
         private Modification[] effects;
         private float cost;
         private bool hasData = false;
         private float timer;
 
-        public IEnumerable<Condition> GetRequirements(Agent agent)
+        public IEnumerable<Condition> GetPreconditions(Agent agent)
         {
             EnsureData();
-            return requirements;
+            return preconditions;
         }
 
         public IEnumerable<Modification> GetEffects(Agent agent)
@@ -39,7 +39,7 @@ namespace AillieoUtils.EasyGOAP
                 return;
             }
 
-            GetData(out requirements, out effects, out cost);
+            GetData(out preconditions, out effects, out cost);
             hasData = true;
         }
 
@@ -47,7 +47,7 @@ namespace AillieoUtils.EasyGOAP
         {
             EnsureData();
 
-            if (!agent.GetWorld().GetWorldState().MeetConditions(GetRequirements(agent)))
+            if (!agent.GetWorld().GetWorldState().MeetConditions(GetPreconditions(agent)))
             {
                 return ActionResult.Failed;
             }

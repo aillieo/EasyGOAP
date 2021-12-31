@@ -1,41 +1,69 @@
 using AillieoUtils.PropLogics;
+using System.Collections.Generic;
 
 namespace AillieoUtils.EasyGOAP
 {
     public class Goal
     {
-        private readonly Condition condition;
+        private readonly Condition[] conditions;
+
+        public Goal(Condition[] conditions)
+        {
+            this.conditions = conditions;
+        }
 
         public Goal(Condition condition)
+            : this(new Condition[] { condition })
         {
-            this.condition = condition;
         }
 
         public Goal(string key, ConditionMode op, Property value)
-            : this(new Condition(key, op, value))
+            : this(new Condition[] { new Condition(key, op, value) })
         {
         }
 
         public bool Reached(WorldState state)
         {
-            return condition.Evaluate(state);
+            foreach (var condition in conditions)
+            {
+                if (!condition.Evaluate(state))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
-        public override bool Equals(object obj)
+        public bool Reached(WorldState state, List<Condition> failedToFill)
         {
-            if (obj is Goal other)
+            bool reached = true;
+            foreach (var condition in conditions)
             {
-                return this.condition.Equals(other.condition);
+                if (!condition.Evaluate(state))
+                {
+                    reached = false;
+                    failedToFill.Add(condition);
+                }
             }
-            else
-            {
-                return false;
-            }
+            return reached;
         }
 
-        public override int GetHashCode()
-        {
-            return condition.GetHashCode();
-        }
+        // todo 逐个 condition 对比
+        //public override bool Equals(object obj)
+        //{
+        //    if (obj is Goal other)
+        //    {
+        //        return this.conditions.Equals(other.conditions);
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        //public override int GetHashCode()
+        //{
+        //    return conditions.GetHashCode();
+        //}
     }
 }

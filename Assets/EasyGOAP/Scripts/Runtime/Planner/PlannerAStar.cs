@@ -45,7 +45,7 @@ namespace AillieoUtils.EasyGOAP
 
                 foreach (IAction a in availableActions)
                 {
-                    if (top.state.MeetConditions(a.GetRequirements(agent)))
+                    if (top.state.MeetConditions(a.GetPreconditions(agent)))
                     {
                         LogicNode next = LogicNode.Create();
                         next.action = a;

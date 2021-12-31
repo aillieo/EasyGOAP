@@ -5,7 +5,7 @@ namespace AillieoUtils.EasyGOAP
 {
     public interface IAction
     {
-        IEnumerable<Condition> GetRequirements(Agent agent);
+        IEnumerable<Condition> GetPreconditions(Agent agent);
 
         IEnumerable<Modification> GetEffects(Agent agent);
 

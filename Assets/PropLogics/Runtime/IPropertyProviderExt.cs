@@ -37,6 +37,20 @@ namespace AillieoUtils.PropLogics
             return conditions.All(c => c.Evaluate(propertyProvider));
         }
 
+        public static bool MeetConditions(this IPropertyProvider propertyProvider, IEnumerable<Condition> conditions, List<Condition> failedToFill)
+        {
+            bool meet = true;
+            foreach (var condition in conditions)
+            {
+                if (!condition.Evaluate(propertyProvider))
+                {
+                    meet = false;
+                    failedToFill.Add(condition);
+                }
+            }
+            return meet;
+        }
+
         public static void ApplyModifications(this IPropertyProvider propertyProvider, IEnumerable<Modification> modifications)
         {
             foreach (var m in modifications)

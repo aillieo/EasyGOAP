@@ -7,34 +7,53 @@ namespace AillieoUtils.EasyGOAP
     // 非常低效 临时使用 后续替换
     public class SimplePriorityQueue<T>
     {
-        private HashSet<T> set = new HashSet<T>();
+        private readonly HashSet<T> set = new HashSet<T>();
+        private readonly List<T> list = new List<T>();
+        private bool dirty = true;
 
         public T Dequeue()
         {
-            throw new NotImplementedException();
+            T item = Peek();
+            list.RemoveAt(0);
+            set.Remove(item);
+            return item;
         }
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            Sort();
+            return list[0];
         }
 
         public void Enqueue(T item)
         {
-            throw new NotImplementedException();
+            if (set.Add(item))
+            {
+                list.Add(item);
+                dirty = true;
+            }
         }
 
         public int Count
         {
             get
             {
-                throw new NotImplementedException();
+                return list.Count;
             }
         }
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return set.Contains(item);
+        }
+
+        private void Sort()
+        {
+            if (dirty)
+            {
+                dirty = false;
+                list.Sort();
+            }
         }
     }
 }

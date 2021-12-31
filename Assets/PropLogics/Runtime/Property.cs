@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace AillieoUtils.PropLogics
 {
     [Serializable]
-    public struct Property
+    public struct Property : IEquatable<Property>
     {
         public Value value;
         public ValueType type;
@@ -111,22 +111,7 @@ namespace AillieoUtils.PropLogics
         {
             if (obj is Property prop)
             {
-                if (this.type != prop.type)
-                {
-                    return false;
-                }
-
-                switch (this.type)
-                {
-                case ValueType.Invalid:
-                    return true;
-                case ValueType.Int:
-                    return this.value.intValue == prop.value.intValue;
-                case ValueType.Float:
-                    return this.value.floatValue == prop.value.floatValue;
-                case ValueType.Bool:
-                    return this.value.boolValue == prop.value.boolValue;
-                }
+                return Equals(prop);
             }
 
             return false;
@@ -140,6 +125,28 @@ namespace AillieoUtils.PropLogics
             }
 
             return this.type.GetHashCode() ^ this.value.intValue.GetHashCode() << 2;
+        }
+
+        public bool Equals(Property other)
+        {
+            if (this.type != other.type)
+            {
+                return false;
+            }
+
+            switch (this.type)
+            {
+                case ValueType.Invalid:
+                    return true;
+                case ValueType.Int:
+                    return this.value.intValue == other.value.intValue;
+                case ValueType.Float:
+                    return this.value.floatValue == other.value.floatValue;
+                case ValueType.Bool:
+                    return this.value.boolValue == other.value.boolValue;
+            }
+
+            throw new Exception();
         }
 
         public static bool operator ==(Property lhs, Property rhs)

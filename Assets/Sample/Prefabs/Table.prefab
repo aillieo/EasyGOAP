@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 4586143556821216194}
   - component: {fileID: 4586143556821216193}
   - component: {fileID: 4586143556821216192}
+  - component: {fileID: 9074668628239044825}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4586143556821216194
 Transform:
@@ -79,6 +80,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &9074668628239044825
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586143556821216221}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &4586143557785282860
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,38 +140,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 8783889424410744936}
-  entry:
-    key: 
-    value:
-      value:
-        intValue: 1074706514
-      type: 2
-  entries:
-  - key: 
-    value:
-      value:
-        intValue: 26
-      type: 1
-  - key: 
-    value:
-      value:
-        intValue: 0
-      type: 0
-  prop:
-    value:
-      intValue: 0
-    type: 2
-  props:
-  - value:
-      intValue: 0
-    type: 2
-  - value:
-      intValue: -1
-    type: 0
-  s1: 
-  s12:
-  - 
-  - 
+  tableName: 
+  itemName: 
+  itemStatus: 
+  itemCount: 0
 --- !u!1 &6198450751154846118
 GameObject:
   m_ObjectHideFlags: 0

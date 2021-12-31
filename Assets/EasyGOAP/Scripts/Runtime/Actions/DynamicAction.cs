@@ -6,21 +6,21 @@ namespace AillieoUtils.EasyGOAP
     public class DynamicAction : IAction
     {
         private readonly WorldState state;
-        private readonly Condition[] requirements;
+        private readonly Condition[] preconditions;
         private readonly Modification[] effects;
         private readonly float cost;
 
         public DynamicAction(WorldState state, Condition[] reqs, Modification[] effs, float cst)
         {
             this.state = state;
-            this.requirements = reqs;
+            this.preconditions = reqs;
             this.effects = effs;
             this.cost = cst;
         }
 
-        public IEnumerable<Condition> GetRequirements(Agent agent)
+        public IEnumerable<Condition> GetPreconditions(Agent agent)
         {
-            return requirements;
+            return preconditions;
         }
 
         public IEnumerable<Modification> GetEffects(Agent agent)
